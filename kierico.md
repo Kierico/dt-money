@@ -6,3 +6,13 @@
 
 1. `yarn create react-app {nome do projeto} --template typescript`
 
+## CSS no JavaScript
+
+2. `yarn add styled-components`
+
+    `yarn start` inicia a aplicação.
+
+3. `yarn add @types/styled-components -D`
+
+    Instalar também a extensão do Styled-Components no VS-Code.
+
