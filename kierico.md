@@ -187,3 +187,7 @@
         }
     ```
 
+## Polished - biblioteca de funções para modificar as cores.
+
+1. Install `yarn add polished`
+
