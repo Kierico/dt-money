@@ -90,3 +90,78 @@
         }, []);
     ```
 
+## React Modal
+
+[React Modal - Github](https://github.com/reactjs/react-modal)
+
+1. Install `yarn add react-modal`
+
+    `yarn add @types/react-modal -D`
+
+2. Adicione no arquivo "App.tsx" no "src":
+
+    ```js
+        import { useState } from "react";
+        import Modal from 'react-modal';    // add
+        import { Dashboard } from "./components/Dashboard";
+        import { Header } from "./components/Header";
+        import { GlobalStyle } from "./styles/global";
+
+        Modal.setAppElement('#root');   // add
+
+        export function App() {
+
+            /** Modal */    // add
+            const [isNewTransactionModalOpen, setIsNewTransactionModalOpen] = useState(false);
+
+            function handleOpenNewTransactionModal() {
+                setIsNewTransactionModalOpen(true);
+            }
+
+            function handleCloseNewTransactionModal() {
+                setIsNewTransactionModalOpen(false);
+            }
+
+            return (
+                <>
+                    <GlobalStyle />
+                    <Header onOpenNewTransactionModal={handleOpenNewTransactionModal} />    // add
+                    <Dashboard />
+                    <Modal  // add
+                        isOpen={isNewTransactionModalOpen}
+                        onRequestClose={handleCloseNewTransactionModal}
+                    >
+                        <h2>Cadastrar transação</h2>
+                    </Modal>
+                </>
+            );
+        }
+    ```
+
+    E, no arquivo "index.tsx" no Header:
+
+    ```js
+        import logoImg from '../../assets/logo.svg';
+        import { Container, Content } from './styles';
+
+        interface HeaderProps { // add
+            onOpenNewTransactionModal: () => void;
+        }
+
+        export function Header({ onOpenNewTransactionModal }: HeaderProps) {
+
+            return (
+                <Container>
+                    <Content>
+                        <img src={logoImg} alt="dt money" />
+                        <button type="button"
+                            onClick={onOpenNewTransactionModal} // add
+                        >
+                            Nova transação
+                        </button>
+                    </Content>
+                </Container>
+            );
+        }
+    ```
+
