@@ -98,13 +98,37 @@
 
     `yarn add @types/react-modal -D`
 
-2. Adicione no arquivo "App.tsx" no "src":
+2. Crie o componente "NewTransactionModal" em "componentes":
+
+    ```js
+        import Modal from 'react-modal';
+
+        interface NewTransactionModalProps {
+            isOpen: boolean;
+            onRequestClose: () => void;
+        }
+
+        export function NewTransactionModal({ isOpen, onRequestClose }: NewTransactionModalProps) {
+            return (
+                <Modal
+                    isOpen={isOpen}
+                    onRequestClose={onRequestClose}
+                >
+                    <h2>Cadastrar transação</h2>
+                </Modal>
+            );
+        }
+    ```
+
+
+    Adicione no arquivo "App.tsx" no "src":
 
     ```js
         import { useState } from "react";
         import Modal from 'react-modal';    // add
         import { Dashboard } from "./components/Dashboard";
         import { Header } from "./components/Header";
+        import { NewTransactionModal } from "./components/NewTransactionModal"; // add
         import { GlobalStyle } from "./styles/global";
 
         Modal.setAppElement('#root');   // add
@@ -125,14 +149,12 @@
             return (
                 <>
                     <GlobalStyle />
-                    <Header onOpenNewTransactionModal={handleOpenNewTransactionModal} />    // add
+                    <Header onOpenNewTransactionModal={handleOpenNewTransactionModal} />
                     <Dashboard />
-                    <Modal  // add
+                    <NewTransactionModal
                         isOpen={isNewTransactionModalOpen}
                         onRequestClose={handleCloseNewTransactionModal}
-                    >
-                        <h2>Cadastrar transação</h2>
-                    </Modal>
+                    />
                 </>
             );
         }
