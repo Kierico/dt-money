@@ -28,6 +28,7 @@ export const Container = styled.div`
 
         &.highlight-background {
             background-color: var(--green);
+            color: var(--shape);
         }
     }
 `;
